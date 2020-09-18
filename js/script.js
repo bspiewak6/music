@@ -1,36 +1,38 @@
+var artistEl = document.querySelector("#artist-container");
+function getArtist() {
 var apiKey = "385243-TuneOut-LTR11AIV";
 fetch(
-  'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=kiss' + '&k=' + apiKey
-)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    // Use 'querySelector' to get the ID of the container
-    var responseContainerEl = document.querySelector('#response-container');
-    // Create an '<p>' element
-    var tunesP = document.createElement('p');
-    // Set attribute to the 'webTitle' from API response
-    tunesP.setAttribute(response.results[0].apiUrl);
-    // Append the '<p>' element to the page
-    responseContainerEl.appendChild(tunesP);
-  });
-
-
-var newsApiKey = "3f86fcdf-510e-4f3c-a66e-87ed087781ce";
-var url =
-  "https://cors-anywhere.herokuapp.com/https://content.guardianapis.com/search?q=interviews&section=music&api-key=" + newsApiKey;
-function getNews() {
-  // var req = new Request(url);
-  fetch(url)
-    .then(function (response) {
+    'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=kanye west' + '&k=' + apiKey + '&limit=5'
+  )
+    .then(function(response) {
       return response.json();
     })
-    .then(function (data) {
-      console.log(data);
+    .then(function(response) {
+      console.log(response.Similar.Results);
+      var artistName = response.Similar.Results[0].Name;
+      var artist = document.createElement("p");
+      artist.textContent = "Artist: " + artistName;
+      artistEl.appendChild(artist);
+      var artistName = response.Similar.Results[1].Name;
+      var artist = document.createElement("p");
+      artist.textContent = "Artist: " + artistName;
+      artistEl.appendChild(artist);
     });
-};
-getNews();
+  };
+  getArtist();
+    var newsApiKey = "3f86fcdf-510e-4f3c-a66e-87ed087781ce";
+    var url =
+    "https://cors-anywhere.herokuapp.com/https://content.guardianapis.com/search?q=interviews&section=music&api-key=" + newsApiKey;
+    function getNews() {
+      // var req = new Request(url);
+      fetch (url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        console.log(response.response.results[1].webTitle);
+      });
+    };
+    // getNews();
 
 
