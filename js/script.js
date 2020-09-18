@@ -1,6 +1,6 @@
 var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
-var userInput = document.querySelector("#icon-suffix");
+var userInput = document.querySelector("#icon_suffix");
 
 function getArtist() {
   var artist = userInput.value.trim();
@@ -15,6 +15,7 @@ fetch(
     .then(function(response) {
       artistContainerEl.innerHTML= "";
 
+      var artistName = response.Similar.Results.Name;
       var artistTag = document.createElement("p");
       artistTag.innerHTML = "Artist: " + artist;
       artistContainerEl.appendChild(artistTag);
