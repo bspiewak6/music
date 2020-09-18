@@ -3,33 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-  crossorigin="anonymous"
-/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="style.css"/>
-  <title>Document</title>
+  <title>Tune Out</title>
 </head>
+
 <body>
   <header>
-    <nav class="nav-wrapper">
-    <h1>Tune Out</h1>
-  </div>
+    <nav class="black">
+      <div class="nav-wrapper center">
+        <h2>Tune Out</h2>
+      </div>
+    </nav>
   </header>
-  <div id="artist-container" class="">
-    <form>
-      <div class="">
-        <div class="">
-          <input class="" type="text" placeholder="Artist Name...">
-          <i class=""></i>
+
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s3">
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Artist or Album Name</label>
+          <button class="btn waves-effect waves-dark" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
         </div>
-        <div class=""></div>
       </div>
     </form>
   </div>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="script.js"></script>
