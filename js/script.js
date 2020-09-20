@@ -30,10 +30,49 @@ fetch(
 
       var artistTag = document.createElement("p");
       artistTag.innerHTML = artist;
+      artistTag.classList = "orange-text"
       cardContent.appendChild(artistTag);
 
-      var recOne = response.Similar.Artist[1].Name;
-      var 
+      var recContainer = document.createElement("div");
+      artistCard.appendChild(recContainer);
+
+      var recTitle = document.createElement("span");
+      recTitle.classList = "card-title white-text text-spacing"
+      recTitle.innerHTML = "Other Artists:";
+      recContainer.appendChild(recTitle);
+
+      var recList = document.createElement("ul");
+      recContainer.appendChild(recList);
+
+      var itemName = response.Similar.Results[0].Name;
+      var itemOne = document.createElement("li");
+      itemOne.innerHTML = itemName;
+      itemOne.classList = "orange-text text-spacing"
+      recList.appendChild(itemOne);
+
+      var itemName = response.Similar.Results[1].Name;
+      var itemOne = document.createElement("li");
+      itemOne.innerHTML = itemName;
+      itemOne.classList = "orange-text text-spacing"
+      recList.appendChild(itemOne);
+
+      var itemName = response.Similar.Results[2].Name;
+      var itemOne = document.createElement("li");
+      itemOne.innerHTML = itemName;
+      itemOne.classList = "orange-text text-spacing"
+      recList.appendChild(itemOne);
+
+      var itemName = response.Similar.Results[3].Name;
+      var itemOne = document.createElement("li");
+      itemOne.innerHTML = itemName;
+      itemOne.classList = "orange-text text-spacing"
+      recList.appendChild(itemOne);
+
+      var itemName = response.Similar.Results[4].Name;
+      var itemOne = document.createElement("li");
+      itemOne.innerHTML = itemName;
+      itemOne.classList = "orange-text text-spacing"
+      recList.appendChild(itemOne);
     });
   };
 
