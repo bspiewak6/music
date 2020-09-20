@@ -15,10 +15,26 @@ fetch(
     .then(function(response) {
       artistContainerEl.innerHTML= "";
 
-      var artistName = response.Similar.Results.Name;
+      // var artistCol = document.createElement("div");
+      // artistCol.classList = "s12 m6";
+      // artistContainerEl.appendChild(artistCol);
+
+      var artistCard = document.createElement("div");
+      artistCard.classList = "card blue-grey darken-1";
+      artistContainerEl.appendChild(artistCard);
+
+      var cardContent = document.createElement("div");
+      cardContent.classList = "card-content white-text";
+      artistCard.appendChild(cardContent);
+      
+      var cardTitle = document.createElement("span");
+      cardTitle.classList = "card-title";
+      cardTitle.innerHTML = "Artist";
+      cardContent.appendChild(cardTitle);
+
       var artistTag = document.createElement("p");
-      artistTag.innerHTML = "Artist: " + artist;
-      artistContainerEl.appendChild(artistTag);
+      artistTag.innerHTML = artist;
+      cardContent.appendChild(artistTag);
     });
   };
 
