@@ -15,10 +15,6 @@ fetch(
     .then(function(response) {
       artistContainerEl.innerHTML= "";
 
-      // var artistCol = document.createElement("div");
-      // artistCol.classList = "s12 m6";
-      // artistContainerEl.appendChild(artistCol);
-
       var artistCard = document.createElement("div");
       artistCard.classList = "card blue-grey darken-1";
       artistContainerEl.appendChild(artistCard);
@@ -35,6 +31,9 @@ fetch(
       var artistTag = document.createElement("p");
       artistTag.innerHTML = artist;
       cardContent.appendChild(artistTag);
+
+      var recOne = response.Similar.Artist[1].Name;
+      var 
     });
   };
 
