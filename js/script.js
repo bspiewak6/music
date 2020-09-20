@@ -7,7 +7,7 @@ function getArtist() {
 
 var apiKey = "385243-TuneOut-LTR11AIV";
 fetch(
-    'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&k=' + apiKey + '&limit=5'
+    'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
   )
     .then(function(response) {
       return response.json();
@@ -15,8 +15,13 @@ fetch(
     .then(function(response) {
       artistContainerEl.innerHTML= "";
 
+      console.log(response);
+
+      var artistInfoTeaser = response.Similar.Info[0].wTeaser;
+      var yUrl = response.Similar.Info[0].yUrl;
+
       var artistCard = document.createElement("div");
-      artistCard.classList = "card blue-grey darken-1";
+      artistCard.classList = "card grey lighten-1";
       artistContainerEl.appendChild(artistCard);
 
       var cardContent = document.createElement("div");
@@ -25,13 +30,25 @@ fetch(
       
       var cardTitle = document.createElement("span");
       cardTitle.classList = "card-title";
-      cardTitle.innerHTML = "Artist";
+      cardTitle.innerHTML = "Artist:";
       cardContent.appendChild(cardTitle);
 
+      
       var artistTag = document.createElement("p");
+      artistTag.classList = "red-text"
+      artistTag.setAttribute("href", yUrl);
       artistTag.innerHTML = artist;
-      artistTag.classList = "orange-text"
       cardContent.appendChild(artistTag);
+      
+      var artistDescription = document.createElement("p");
+      artistDescription.innerHTML = artistInfoTeaser;
+      artistDescription.classList = "black-text";
+      cardContent.appendChild(artistDescription);
+
+      // var artistVideo = document.createElement("link");
+      // artistVideo.setAttribute("href", yUrl);
+      // cardContent.appendChild(artistVideo);
+
 
       var recContainer = document.createElement("div");
       artistCard.appendChild(recContainer);
@@ -47,31 +64,31 @@ fetch(
       var itemName = response.Similar.Results[0].Name;
       var itemOne = document.createElement("li");
       itemOne.innerHTML = itemName;
-      itemOne.classList = "orange-text text-spacing"
+      itemOne.classList = "red-text text-spacing"
       recList.appendChild(itemOne);
 
       var itemName = response.Similar.Results[1].Name;
       var itemOne = document.createElement("li");
       itemOne.innerHTML = itemName;
-      itemOne.classList = "orange-text text-spacing"
+      itemOne.classList = "red-text text-spacing"
       recList.appendChild(itemOne);
 
       var itemName = response.Similar.Results[2].Name;
       var itemOne = document.createElement("li");
       itemOne.innerHTML = itemName;
-      itemOne.classList = "orange-text text-spacing"
+      itemOne.classList = "red-text text-spacing"
       recList.appendChild(itemOne);
 
       var itemName = response.Similar.Results[3].Name;
       var itemOne = document.createElement("li");
       itemOne.innerHTML = itemName;
-      itemOne.classList = "orange-text text-spacing"
+      itemOne.classList = "red-text text-spacing"
       recList.appendChild(itemOne);
 
       var itemName = response.Similar.Results[4].Name;
       var itemOne = document.createElement("li");
       itemOne.innerHTML = itemName;
-      itemOne.classList = "orange-text text-spacing"
+      itemOne.classList = "red-text text-spacing"
       recList.appendChild(itemOne);
     });
   };
