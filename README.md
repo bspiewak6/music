@@ -1,12 +1,11 @@
 # TuneOut Music App
 
 ## Table of Contents
-* [User Story](#userstory)
+* [User Story](#user_story)
 * [Criteria](#criteria)
 * [Technologies](#technologies)
 * [Screenshot](#screenshot)
 * [Requirements](#requirements)
-* [Additional](#additional)
 * [Links](#links)
 
 ## User Story
