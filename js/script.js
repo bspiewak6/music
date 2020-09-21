@@ -3,6 +3,16 @@ var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
 
+// variables for news section
+var newsConatainer = document.querySelector("#news-container");
+var articleSearch = document.querySelector("#article-search");
+var articleInput = document.querySelector("#article-input");
+
+// initialize the dropdown select menu for article searches
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
 // function to get artist from user search
 // fetch call using tastedive API
 function getArtist() {
@@ -119,24 +129,32 @@ fetch(
     getArtist();
   };
 
+  function articleSubmitHandler(event) {
+    event.preventDefault();
+    getNews();
+  };
+  
+  // function that gets News Articles from the NYT api
+  function getNews() {
+
+    // variables to hold the New York Times apiKey and url
+    var newsApiKey = "y9hgElnn7nwF3TNGuAv89poiSSqIlw4X";
+    var articleType = articleInput.value.trim();
+    
+
+    fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + articleType + "&api-key=" + newsApiKey)
+    .then(function(response) {
+      return response.json()
+    })
+    .then (function(response) {
+      console.log(response);
+    })
+  };
+  
+
+
+
   // event listener added for user search button
   artistSearch.addEventListener("submit", formSubmitHandler);
-
-
-
-
-    // var newsApiKey = "3f86fcdf-510e-4f3c-a66e-87ed087781ce";
-    // var url =
-    // "https://cors-anywhere.herokuapp.com/https://content.guardianapis.com/search?q=interviews&section=music&api-key=" + newsApiKey;
-    // function getNews() {
-    //   // var req = new Request(url);
-    //   fetch (url)
-    //   .then(function(response) {
-    //     return response.json();
-    //   })
-    //   .then(function(response) {
-    //     console.log(response.response.results[1].webTitle);
-    //   });
-    // };
-    // getNews();
-
+  // event listener added for user search button in the article section
+  articleSearch.addEventListener("submit", articleSubmitHandler);
