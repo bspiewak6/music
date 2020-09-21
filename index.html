@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- All style links including materialize and google fonts --> 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./css/style.css"/>
@@ -10,6 +11,7 @@
 </head>
 
 <body>
+  <!-- Create sticky navbar that will follow the user down the page -->
   <header>
     <div class="navbar-fixed">
       <nav class="black">
@@ -19,12 +21,14 @@
    </nav>
    </div>
   </header>
-
+  
+  <!-- Hero image -->
   <div class="row">
     <div class="s12 m12 l8">
       <img src="./images/HeroImage.jpg" max-width="100%" class="responsive-img">
     </div>
-
+  
+  <!-- Search form --> 
   <div class="row">
     <form id="artist-search" class="">
       <div class="">
@@ -38,11 +42,12 @@
       </div>
     </form>
 
+    <!-- Container that holds artist info once user searches for artist --> 
     <div id="artist-container" class="col s9">     
     </div>
   </div>
 
-
+  <!-- All script file links including jquery and materialize --> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="./js/script.js"></script>
