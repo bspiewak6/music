@@ -5,7 +5,6 @@
 * [Criteria](#criteria)
 * [Technologies](#technologies)
 * [Screenshot](#screenshot)
-* [Requirements](#requirements)
 * [Links](#links)
 
 ## User Story
