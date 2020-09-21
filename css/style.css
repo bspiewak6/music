@@ -4,6 +4,7 @@ body {
 
 .text-spacing {
     padding-left: 20px;
+    justify-content: space-evenly;
 }
 
 .rec-container {
