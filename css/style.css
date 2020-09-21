@@ -1,3 +1,12 @@
 body {
     font-family: "Avenir","Helvetica","Arial",sans-serif;
 }
+
+.text-spacing {
+    padding-left: 20px;
+    justify-content: space-evenly;
+}
+
+.rec-container {
+    padding-bottom: 10px;
+}
