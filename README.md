@@ -1,13 +1,17 @@
 # TuneOut Music App
 
 ## Table of Contents
-* [User Story](#user_story)
+* [User Story](#user-story)
 * [Criteria](#criteria)
 * [Technologies](#technologies)
 * [Screenshot](#screenshot)
 * [Links](#links)
 
 ## User Story
+AS A coding boot camp student
+I WANT to tune out by using an application that can search for my favorite music, books, podcasts and video games. 
+
+SO THAT when I need a break or get stuck, I can TuneOut
 
 ## Criteria
 * Use a CSS framework other than Bootstrap.
