@@ -8,9 +8,8 @@
 * [Links](#links)
 
 ## User Story
-AS A coding boot camp student
-I WANT to tune out by using an application that can search for my favorite music, books, podcasts and video games. 
-
+AS A coding boot camp student <br />
+I WANT to tune out by using an application that can search for my favorite music, books, podcasts and video games. <br />
 SO THAT when I need a break or get stuck, I can TuneOut
 
 ## Criteria
