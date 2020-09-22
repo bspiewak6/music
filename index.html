@@ -35,19 +35,19 @@
           <div class="input-field col s3">
             <input id="icon_suffix" type="text" class="validate">
             <label for="icon_suffix">Search For...</label>
-            <button class="btn blue-grey lighten-2" type="submit" name="action">Search
+            <button class="btn grey black-text lighten-2" type="submit" name="action">Search
               <i class="material-icons right">search</i>
             </button>
           </div>
         </div>
       </form>
 
-      <!-- Container that holds artist info once user searches for artist --> 
+      <!-- Container that holds user search description and 5 recommendations --> 
       <div id="artist-container" class="col s9">     
       </div>
     </div>
 
-    <!-- Container that holds article info once user searches for an article -->
+    <!-- Container that holds user searched article(s) -->
     <div class="row" id="news-container">
       <form class="input-field col s3" id="article-search">
         <select>
@@ -56,11 +56,21 @@
           <option value="books">Books</option>
           <option value="movies">Movies</option>
         </select>
-        <button class="btn blue-grey lighten-2" type="submit" name="action">Search
+        <button class="btn grey black-text lighten-2" type="submit" name="action">Search
           <i class="material-icons right">search</i>
         </button>
       </form>
     </div>
+
+    <!-- Footer -->
+    <footer class="page-footer grey lighten-5">
+      <div class="footer-copyright">
+        <div class="container black-text">
+          🎧 Made for all students around the world
+        <a class="black-text text-lighten-5 right">© 2020 TuneOut</a>
+        </div>
+      </div>
+    </footer>
 
     <!-- All script file links including jquery and materialize --> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

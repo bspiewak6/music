@@ -4,7 +4,7 @@ var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
 
 // variables for news section
-var newsConatainer = document.querySelector("#news-container");
+var newsContainer = document.querySelector("#news-container");
 var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
@@ -51,13 +51,13 @@ fetch(
       cardContent.classList = "card-content white-text";
       artistCard.appendChild(cardContent);
       
-      var cardTitle = document.createElement("span");
-      cardTitle.classList = "card-title";
-      cardTitle.innerHTML = "Artist:";
-      cardContent.appendChild(cardTitle);
+      // var cardTitle = document.createElement("span");
+      // cardTitle.classList = "card-title";
+      // cardTitle.innerHTML = "Artist:";
+      // cardContent.appendChild(cardTitle);
 
       var artistTag = document.createElement("a");
-      artistTag.classList = "red-text"
+      artistTag.classList = "card-title red-text"
       artistTag.setAttribute("href", yUrl);
       artistTag.setAttribute("target", "_blank");
       artistTag.innerHTML = artist;
@@ -70,12 +70,12 @@ fetch(
       
       // dynamically created artist recommendation container
       var recContainer = document.createElement("div");
-      recContainer.classList = "rec-container";
+      recContainer.classList = "card-action rec-container";
       artistCard.appendChild(recContainer);
 
       var recTitle = document.createElement("span");
       recTitle.classList = "card-title white-text text-spacing"
-      recTitle.innerHTML = "Other Artists:";
+      recTitle.innerHTML = "Our Recommendations:";
       recContainer.appendChild(recTitle);
 
       var recList = document.createElement("ul");
@@ -146,7 +146,7 @@ fetch(
     .then(function(response) {
       return response.json()
     })
-    .then (function(response) {
+    .then(function(response) {
       console.log(response);
     })
   };
