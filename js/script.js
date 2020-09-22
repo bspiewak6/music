@@ -8,11 +8,6 @@ var newsContainer = document.querySelector("#news-container");
 var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
-// initialize the dropdown select menu for article searches
-$(document).ready(function(){
-  $('select').formSelect();
-});
-
 // function to get artist from user search
 // fetch call using tastedive API
 function getArtist() {
@@ -145,6 +140,22 @@ fetch(
     // variable that pulls in user searched article NYT url
     var articleUrl = response.response.docs[0].web_url;
       console.log(articleUrl);
+
+    // dynamically created news container 
+    var newsCard = document.createElement("div");
+    newsCard.classList = "card grey lighten-1";
+    newsContainer.appendChild(newsCard);
+
+    var newsContent = document.createElement("div");
+    newsContent.classList = "card-content white-text";
+    newsCard.appendChild(newsContent);
+
+    var newsTag = document.createElement("a");
+    newsTag.classList = "card-title red-text"
+    newsTag.setAttribute("href", articleUrl);
+    newsTag.setAttribute("target", "_blank");
+    newsTag.innerHTML = articleHeadline;
+    newsContent.appendChild(newsTag);
     })
   };
   
