@@ -3,6 +3,16 @@ var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
 
+// variables for news section
+var newsContainer = document.querySelector("#news-container");
+var articleSearch = document.querySelector("#article-search");
+var articleInput = document.querySelector("#article-input");
+
+// initialize the dropdown select menu for article searches
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
 // function to get artist from user search
 // fetch call using tastedive API
 function getArtist() {
@@ -40,14 +50,9 @@ fetch(
       var cardContent = document.createElement("div");
       cardContent.classList = "card-content white-text";
       artistCard.appendChild(cardContent);
-      
-      var cardTitle = document.createElement("span");
-      cardTitle.classList = "card-title";
-      cardTitle.innerHTML = "Artist:";
-      cardContent.appendChild(cardTitle);
 
       var artistTag = document.createElement("a");
-      artistTag.classList = "red-text"
+      artistTag.classList = "card-title red-text"
       artistTag.setAttribute("href", yUrl);
       artistTag.setAttribute("target", "_blank");
       artistTag.innerHTML = artist;
@@ -60,12 +65,12 @@ fetch(
       
       // dynamically created artist recommendation container
       var recContainer = document.createElement("div");
-      recContainer.classList = "rec-container";
+      recContainer.classList = "card-action rec-container";
       artistCard.appendChild(recContainer);
 
       var recTitle = document.createElement("span");
       recTitle.classList = "card-title white-text text-spacing"
-      recTitle.innerHTML = "Other Artists:";
+      recTitle.innerHTML = "Our Recommendations:";
       recContainer.appendChild(recTitle);
 
       var recList = document.createElement("ul");
@@ -119,24 +124,36 @@ fetch(
     getArtist();
   };
 
+  
+  // function that gets News Articles from the NYT api
+  function getNews() {
+
+    // variables to hold the New York Times apiKey and url
+    var newsApiKey = "y9hgElnn7nwF3TNGuAv89poiSSqIlw4X";
+    var articleType = articleInput.value.trim();
+    
+    fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + articleType + "&api-key=" + newsApiKey)
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(response) {
+      console.log(response);
+    
+    // variable that pulls in user searched article headline 
+    var articleHeadline = response.response.docs[0].headline.main;
+      console.log(articleHeadline);
+    // variable that pulls in user searched article NYT url
+    var articleUrl = response.response.docs[0].web_url;
+      console.log(articleUrl);
+    })
+  };
+  
+  function articleSubmitHandler(event) {
+    event.preventDefault();
+    getNews();
+  };
+
   // event listener added for user search button
   artistSearch.addEventListener("submit", formSubmitHandler);
-
-
-
-
-    // var newsApiKey = "3f86fcdf-510e-4f3c-a66e-87ed087781ce";
-    // var url =
-    // "https://cors-anywhere.herokuapp.com/https://content.guardianapis.com/search?q=interviews&section=music&api-key=" + newsApiKey;
-    // function getNews() {
-    //   // var req = new Request(url);
-    //   fetch (url)
-    //   .then(function(response) {
-    //     return response.json();
-    //   })
-    //   .then(function(response) {
-    //     console.log(response.response.results[1].webTitle);
-    //   });
-    // };
-    // getNews();
-
+  // event listener added for user search button in the article section
+  articleSearch.addEventListener("submit", articleSubmitHandler);

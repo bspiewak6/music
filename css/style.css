@@ -1,12 +1,16 @@
 body {
     font-family: "Avenir","Helvetica","Arial",sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 .text-spacing {
-    padding-left: 20px;
+    /* padding-left: 20px; */
     justify-content: space-evenly;
 }
 
 .rec-container {
     padding-bottom: 10px;
 }
+      
