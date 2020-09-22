@@ -125,7 +125,6 @@ fetch(
   };
 
   
-  
   // function that gets News Articles from the NYT api
   function getNews() {
 
@@ -133,13 +132,19 @@ fetch(
     var newsApiKey = "y9hgElnn7nwF3TNGuAv89poiSSqIlw4X";
     var articleType = articleInput.value.trim();
     
-
     fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + articleType + "&api-key=" + newsApiKey)
     .then(function(response) {
       return response.json()
     })
     .then(function(response) {
       console.log(response);
+    
+    // variable that pulls in user searched article headline 
+    var articleHeadline = response.response.docs[0].headline.main;
+      console.log(articleHeadline);
+    // variable that pulls in user searched article NYT url
+    var articleUrl = response.response.docs[0].web_url;
+      console.log(articleUrl);
     })
   };
   
