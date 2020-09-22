@@ -48,18 +48,22 @@
     </div>
 
     <!-- Container that holds user searched article(s) -->
-    <div class="row" id="news-container">
-      <form class="input-field col s3" id="article-search">
-        <select>
-          <option id="article-input" value="" disabled selected>Search For Articles</option>
-          <option value="music">Music</option>
-          <option value="books">Books</option>
-          <option value="movies">Movies</option>
-        </select>
-        <button class="btn grey black-text lighten-2" type="submit" name="action">Search
-          <i class="material-icons right">search</i>
-        </button>
+    <div class="row">
+      <form id="article-search">
+        <div class="">
+          <div class="input-field col s3">
+            <input id="article-input" type="text" class="validate">
+            <label for="icon_suffix">Search For...</label>
+            <button class="btn grey black-text lighten-2" type="submit" name="action">Search
+              <i class="material-icons right">search</i>
+            </button>
+          </div>
+        </div>
       </form>
+    
+      <!-- Container that holds articles that are searched --> 
+      <div id="news-container" class="col s9">     
+      </div>
     </div>
 
     <!-- Footer -->

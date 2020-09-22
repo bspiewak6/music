@@ -50,11 +50,6 @@ fetch(
       var cardContent = document.createElement("div");
       cardContent.classList = "card-content white-text";
       artistCard.appendChild(cardContent);
-      
-      // var cardTitle = document.createElement("span");
-      // cardTitle.classList = "card-title";
-      // cardTitle.innerHTML = "Artist:";
-      // cardContent.appendChild(cardTitle);
 
       var artistTag = document.createElement("a");
       artistTag.classList = "card-title red-text"
@@ -129,10 +124,7 @@ fetch(
     getArtist();
   };
 
-  function articleSubmitHandler(event) {
-    event.preventDefault();
-    getNews();
-  };
+  
   
   // function that gets News Articles from the NYT api
   function getNews() {
@@ -151,8 +143,10 @@ fetch(
     })
   };
   
-
-
+  function articleSubmitHandler(event) {
+    event.preventDefault();
+    getNews();
+  };
 
   // event listener added for user search button
   artistSearch.addEventListener("submit", formSubmitHandler);
