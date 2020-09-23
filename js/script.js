@@ -2,6 +2,9 @@
 var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
+var btnInsert = document.querySelector("#btnInsert");
+var lsOutput = document.querySelector("#lsOutput");
+var myArr = [];
 
 // variables for news section
 var newsContainer = document.querySelector("#news-container");
@@ -9,11 +12,11 @@ var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
 // function to get artist from user search
-// fetch call using tastedive API
 function getArtist() {
   var artist = userInput.value.trim();
-
-var apiKey = "385243-TuneOut-LTR11AIV";
+  
+  var apiKey = "385243-TuneOut-LTR11AIV";
+  // fetch call using tastedive API
 fetch(
     'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
   )
@@ -22,7 +25,27 @@ fetch(
     })
     .then(function(response) {
       artistContainerEl.innerHTML= "";
-      // console.log(response);
+
+      // LocalStorage
+      var key = "name";
+      var value = userInput.value;
+      
+      if (key && value) {
+        localStorage.setItem(key, value);
+      }
+      
+      for (i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        // var value = localStorage.getItem(key);
+        var listItem = document.createElement("li");
+        listItem.innerHTML += localStorage.getItem(key); 
+        lsOutput.appendChild(listItem);
+
+        // push value to empty myArr
+        myArr.push(value);
+        console.log(localStorage);
+        console.log(myArr);
+      }
 
       // variable that pulls in user searched artist description 
       var artistInfoTeaser = response.Similar.Info[0].wTeaser;
@@ -110,16 +133,24 @@ fetch(
       itemFive.innerHTML = itemName;
       itemFive.classList = "red-text text-spacing"
       recList.appendChild(itemFive);
+
+      
+      
     });
   };
-
+  
   // function to get artist from user search
   function formSubmitHandler(event) {
     event.preventDefault();
     getArtist();
   };
-
   
+  
+  // function getLocalStorage() {
+  //   var key = userInput.value;
+  //   console.log(key);
+  // };
+
   // function that gets News Articles from the NYT api
   function getNews() {
 
@@ -132,25 +163,19 @@ fetch(
       return response.json()
     })
     .then(function(response) {
-      // console.log(response);
     
     // variable that pulls in user searched article headline 
     var articleHeadline = response.response.docs[0].headline.main;
-      // console.log(articleHeadline);
 
     // variable that pulls in user searched article NYT url
     var articleUrl = response.response.docs[0].web_url;
-      // console.log(articleUrl);
 
     // varialble that pulls in user searchd article date
     var articleDate = response.response.docs[0].pub_date;
     var formatDate = moment(articleDate).format("ll");
-      // console.log(articleDate);
-      // console.log(formatDate);
 
     // variable that pulls in user searched article snippet
     var articleSnippet = response.response.docs[0].snippet;
-      // console.log(articleSnippet);
 
     // dynamically created news container 
     var newsCard = document.createElement("div");
@@ -191,10 +216,17 @@ fetch(
     getNews();
   };
 
+
+
+
+
   // event listener added for user search button
   artistSearch.addEventListener("submit", formSubmitHandler);
   // event listener added for user search button in the article section
   articleSearch.addEventListener("submit", articleSubmitHandler);
+
+  // event listener to on the button to get local storage
+  // btnInsert.addEventListener("click", getLocalStorage);
 
   // modal event listener and function to open on page load and close when user clicks
   document.querySelector('.instructions').style.display = 'flex';
