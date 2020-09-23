@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- All style links including materialize and google fonts --> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./css/style.css"/>
+    <title>Tune Out</title>
+  </head>
+
+  <body>
+    <!-- Create sticky navbar that will follow the user down the page -->
+    <header>
+      <div class="navbar-fixed">
+        <nav class="black">
+      <div class="nav-wrapper">
+        <a href="" class="brand-logo center">TuneOut</a>
+      </div>
+    </nav>
+    </div>
+    </header>
+    
+    <!-- Hero image -->
+    <div class="row">
+      <div class="s12 m12 l8">
+        <img src="./images/HeroImage.jpg" max-width="100%" class="responsive-img">
+      </div>
+    
+    <!-- Search form --> 
+    <div class="row">
+      <form id="artist-search">
+        <div class="">
+          <div class="input-field col s3">
+            <input id="icon_suffix" type="text" class="validate">
+            <label for="icon_suffix">Search For...</label>
+            <button class="btn grey black-text lighten-2" type="submit" name="action">Search
+              <i class="material-icons right">search</i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Container that holds user search description and 5 recommendations --> 
+      <div id="artist-container" class="col s9">     
+      </div>
+    </div>
+
+    <!-- Container that holds user searched article(s) -->
+    <div class="row">
+      <form id="article-search">
+        <div class="">
+          <div class="input-field col s3">
+            <input id="article-input" type="text" class="validate">
+            <label for="article-input">Search For...</label>
+            <button class="btn grey black-text lighten-2" type="submit" name="action">Search
+              <i class="material-icons right">search</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    
+      <!-- Container that holds articles that are searched --> 
+      <div id="news-container" class="col s9">     
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer grey lighten-5">
+      <div class="footer-copyright">
+        <div class="container black-text">
+          🎧  &nbsp; Made for all students around the world
+        <a class="black-text text-lighten-5 right">© 2020 TuneOut</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- All script file links including jquery and materialize --> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
