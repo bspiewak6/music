@@ -27,10 +27,9 @@ THEN articles are displayed on the page
 1. HTML 
 2. CSS 
 3. JavaScript
-4. jQuery
-5. Materialize CSS
-6. TasteDive Music API
-7. NY Times News API
+4. Materialize CSS
+5. TasteDive Music API
+6. NY Times News API
 
 ## Screenshot
 ![Screenshot](./)

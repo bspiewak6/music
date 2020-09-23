@@ -191,3 +191,9 @@ fetch(
   artistSearch.addEventListener("submit", formSubmitHandler);
   // event listener added for user search button in the article section
   articleSearch.addEventListener("submit", articleSubmitHandler);
+
+  // modal event listener and function to open on page load and close when user clicks
+  document.querySelector('.instructions').style.display = 'flex';
+  document.querySelector('.close').addEventListener('click', function() {
+  document.querySelector('.instructions').style.display = 'none';
+  });
