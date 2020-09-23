@@ -8,11 +8,6 @@ var newsContainer = document.querySelector("#news-container");
 var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
-// initialize the dropdown select menu for article searches
-$(document).ready(function(){
-  $('select').formSelect();
-});
-
 // function to get artist from user search
 // fetch call using tastedive API
 function getArtist() {
@@ -145,6 +140,45 @@ fetch(
     // variable that pulls in user searched article NYT url
     var articleUrl = response.response.docs[0].web_url;
       console.log(articleUrl);
+
+    // varialble that pulls in user searchd article date
+    var articleDate = response.response.docs[0].pub_date;
+      console.log(articleDate);
+    // variable that pulls in user searched article snippet
+    var articleSnippet = response.response.docs[0].snippet;
+      console.log(articleSnippet);
+
+    // dynamically created news container 
+    var newsCard = document.createElement("div");
+    newsCard.classList = "card grey lighten-1";
+    newsContainer.appendChild(newsCard);
+
+    var newsContent = document.createElement("div");
+    newsContent.classList = "card-content white-text";
+    newsCard.appendChild(newsContent);
+
+    var newsTag = document.createElement("a");
+    newsTag.classList = "card-title red-text"
+    newsTag.innerHTML = articleHeadline;
+    newsContent.appendChild(newsTag);
+
+    var newsDate = document.createElement("p");
+    newsDate.classList = "black-text";
+    newsDate.innerHTML = articleDate;
+    newsContent.appendChild(newsDate);
+
+    var newsSnippet = document.createElement("p");
+    newsSnippet.classList = "black-text";
+    newsSnippet.innerHTML = articleSnippet;
+    newsContent.appendChild(newsSnippet);
+
+    var newsLink = document.createElement("a");
+    newsLink.setAttribute("href", articleUrl);
+    newsLink.setAttribute("target", "_blank");
+    newsLink.innerHTML = articleUrl;
+    newsLink.classList = "red-text text-spacing"
+    newsContent.appendChild(newsLink);
+    
     })
   };
   
