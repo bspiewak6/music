@@ -22,7 +22,7 @@ fetch(
     })
     .then(function(response) {
       artistContainerEl.innerHTML= "";
-      console.log(response);
+      // console.log(response);
 
       // variable that pulls in user searched artist description 
       var artistInfoTeaser = response.Similar.Info[0].wTeaser;
@@ -132,21 +132,25 @@ fetch(
       return response.json()
     })
     .then(function(response) {
-      console.log(response);
+      // console.log(response);
     
     // variable that pulls in user searched article headline 
     var articleHeadline = response.response.docs[0].headline.main;
-      console.log(articleHeadline);
+      // console.log(articleHeadline);
+
     // variable that pulls in user searched article NYT url
     var articleUrl = response.response.docs[0].web_url;
-      console.log(articleUrl);
+      // console.log(articleUrl);
 
     // varialble that pulls in user searchd article date
     var articleDate = response.response.docs[0].pub_date;
-      console.log(articleDate);
+    var formatDate = moment(articleDate).format("ll");
+      // console.log(articleDate);
+      // console.log(formatDate);
+
     // variable that pulls in user searched article snippet
     var articleSnippet = response.response.docs[0].snippet;
-      console.log(articleSnippet);
+      // console.log(articleSnippet);
 
     // dynamically created news container 
     var newsCard = document.createElement("div");
@@ -164,7 +168,7 @@ fetch(
 
     var newsDate = document.createElement("p");
     newsDate.classList = "black-text";
-    newsDate.innerHTML = articleDate;
+    newsDate.innerHTML = formatDate;
     newsContent.appendChild(newsDate);
 
     var newsSnippet = document.createElement("p");
@@ -175,7 +179,7 @@ fetch(
     var newsLink = document.createElement("a");
     newsLink.setAttribute("href", articleUrl);
     newsLink.setAttribute("target", "_blank");
-    newsLink.innerHTML = articleUrl;
+    newsLink.innerHTML = "Click here to read full article";
     newsLink.classList = "red-text text-spacing"
     newsContent.appendChild(newsLink);
     
