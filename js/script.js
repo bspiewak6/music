@@ -141,6 +141,13 @@ fetch(
     var articleUrl = response.response.docs[0].web_url;
       console.log(articleUrl);
 
+    // varialble that pulls in user searchd article date
+    var articleDate = response.response.docs[0].pub_date;
+      console.log(articleDate);
+    // variable that pulls in user searched article snippet
+    var articleSnippet = response.response.docs[0].snippet;
+      console.log(articleSnippet);
+
     // dynamically created news container 
     var newsCard = document.createElement("div");
     newsCard.classList = "card grey lighten-1";
@@ -152,10 +159,26 @@ fetch(
 
     var newsTag = document.createElement("a");
     newsTag.classList = "card-title red-text"
-    newsTag.setAttribute("href", articleUrl);
-    newsTag.setAttribute("target", "_blank");
     newsTag.innerHTML = articleHeadline;
     newsContent.appendChild(newsTag);
+
+    var newsDate = document.createElement("p");
+    newsDate.classList = "black-text";
+    newsDate.innerHTML = articleDate;
+    newsContent.appendChild(newsDate);
+
+    var newsSnippet = document.createElement("p");
+    newsSnippet.classList = "black-text";
+    newsSnippet.innerHTML = articleSnippet;
+    newsContent.appendChild(newsSnippet);
+
+    var newsLink = document.createElement("a");
+    newsLink.setAttribute("href", articleUrl);
+    newsLink.setAttribute("target", "_blank");
+    newsLink.innerHTML = articleUrl;
+    newsLink.classList = "red-text text-spacing"
+    newsContent.appendChild(newsLink);
+    
     })
   };
   
