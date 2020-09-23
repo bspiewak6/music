@@ -4,6 +4,7 @@
 * [User Story](#user-story)
 * [Criteria](#criteria)
 * [Technologies](#technologies)
+* [Mockup](#mockup)
 * [Screenshot](#screenshot)
 * [Links](#links)
 
@@ -31,6 +32,9 @@ THEN articles are displayed on the page
 5. Moment.js
 6. TasteDive Music API
 7. NY Times News API
+
+## Mockup
+![Mockup](./images/TuneOut-Mockup.png)
 
 ## Screenshot
 ![Screenshot](./)
