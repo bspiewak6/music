@@ -2,7 +2,6 @@
 var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
-var btnInsert = document.querySelector("#btnInsert");
 var lsOutput = document.querySelector("#lsOutput");
 var myArr = [];
 
@@ -116,25 +115,14 @@ fetch(
         // LocalStorage
         var key = userInput.value;
         var value = artistContainerEl;
-        var dataObj = {key};
-        
-        localStorage.setItem('dataObj', JSON.stringify(dataObj));
-  
-        var retrieveObj = localStorage.getItem('dataObj');
-        console.log(JSON.parse(retrieveObj));
+        // var innerText = artistContainerEl.InnerText;
+        var dataObj = (key, value);
+        console.log(dataObj);
 
-        for (i = 0; i < localStorage.length; i++) {
-          var key = localStorage.key(i);
-          // var value = localStorage.getItem(key);
-          var listItem = document.createElement("li");
-          listItem.innerHTML += localStorage.getItem(key); 
-          lsOutput.appendChild(listItem);
-        
-          // push value to empty myArr
-          myArr.push(value);
-          console.log(localStorage);
-          console.log(myArr);
-        }
+        localStorage.setItem('dataObj', JSON.stringify(dataObj));
+        var retrieveObj = localStorage.getItem('dataObj');
+        var obj = JSON.parse(retrieveObj);
+        console.log(obj);
     });
   };
   
@@ -143,12 +131,6 @@ fetch(
     event.preventDefault();
     getArtist();
   };
-  
-  
-  // function getLocalStorage() {
-  //   var key = userInput.value;
-  //   console.log(key);
-  // };
 
   // function that gets News Articles from the NYT api
   function getNews() {
@@ -223,9 +205,6 @@ fetch(
   artistSearch.addEventListener("submit", formSubmitHandler);
   // event listener added for user search button in the article section
   articleSearch.addEventListener("submit", articleSubmitHandler);
-
-  // event listener to on the button to get local storage
-  // btnInsert.addEventListener("click", getLocalStorage);
 
   // modal event listener and function to open on page load and close when user clicks
   document.querySelector('.instructions').style.display = 'flex';
