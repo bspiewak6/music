@@ -197,9 +197,10 @@ fetch(
     getNews();
   };
 
-
-
-
+  //about us button
+  $(document).ready(function(){
+  $('.tooltipped').tooltip();
+  });
 
   // event listener added for user search button
   artistSearch.addEventListener("submit", formSubmitHandler);

@@ -39,3 +39,12 @@ body {
    transform: rotate(45deg);
    cursor: pointer;
 }
+
+.card-image img {
+    height: fit-content;
+    width: fit-content;
+}
+
+.btn-about {
+    margin-right: 25px;
+}
