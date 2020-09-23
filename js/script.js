@@ -25,117 +25,116 @@ fetch(
     })
     .then(function(response) {
       artistContainerEl.innerHTML= "";
+        
+        // variable that pulls in user searched artist description 
+        var artistInfoTeaser = response.Similar.Info[0].wTeaser;
+        
+        // variable that pulls in youtube link for user searched artist
+        var yUrl = response.Similar.Info[0].yUrl;
+        
+        // variables that pull in youtube links for recommendation list
+        var yUrlOne = response.Similar.Results[0].yUrl;
+        var yUrlTwo = response.Similar.Results[1].yUrl;
+        var yUrlThree = response.Similar.Results[2].yUrl;
+        var yUrlFour = response.Similar.Results[3].yUrl;
+        var yUrlFive = response.Similar.Results[4].yUrl;
+        
+        // dynamically created artist container 
+        var artistCard = document.createElement("div");
+        artistCard.classList = "card grey lighten-1";
+        artistContainerEl.appendChild(artistCard);
+        
+        var cardContent = document.createElement("div");
+        cardContent.classList = "card-content white-text";
+        artistCard.appendChild(cardContent);
+        
+        var artistTag = document.createElement("a");
+        artistTag.classList = "card-title red-text"
+        artistTag.setAttribute("href", yUrl);
+        artistTag.setAttribute("target", "_blank");
+        artistTag.innerHTML = artist;
+        cardContent.appendChild(artistTag);
+        
+        var artistDescription = document.createElement("p");
+        artistDescription.innerHTML = artistInfoTeaser;
+        artistDescription.classList = "black-text";
+        cardContent.appendChild(artistDescription);
+        
+        // dynamically created artist recommendation container
+        var recContainer = document.createElement("div");
+        recContainer.classList = "card-action rec-container";
+        artistCard.appendChild(recContainer);
+        
+        var recTitle = document.createElement("span");
+        recTitle.classList = "card-title white-text text-spacing"
+        recTitle.innerHTML = "Our Recommendations:";
+        recContainer.appendChild(recTitle);
+        
+        var recList = document.createElement("ul");
+        recContainer.appendChild(recList);
+        
+        var itemName = response.Similar.Results[0].Name;
+        var itemOne = document.createElement("a");
+        itemOne.setAttribute("href", yUrlOne);
+        itemOne.setAttribute("target", "_blank");
+        itemOne.innerHTML = itemName;
+        itemOne.classList = "red-text text-spacing"
+        recList.appendChild(itemOne);
+        
+        var itemName = response.Similar.Results[1].Name;
+        var itemTwo = document.createElement("a");
+        itemTwo.setAttribute("href", yUrlTwo);
+        itemTwo.setAttribute("target","_blank");
+        itemTwo.innerHTML = itemName;
+        itemTwo.classList = "red-text text-spacing"
+        recList.appendChild(itemTwo); 
+        
+        var itemName = response.Similar.Results[2].Name;
+        var itemThree = document.createElement("a");
+        itemThree.setAttribute("href", yUrlThree);
+        itemThree.setAttribute("target", "_blank");
+        itemThree.innerHTML = itemName;
+        itemThree.classList = "red-text text-spacing"
+        recList.appendChild(itemThree);
+        
+        var itemName = response.Similar.Results[3].Name;
+        var itemFour = document.createElement("a");
+        itemFour.setAttribute("href", yUrlFour);
+        itemFour.setAttribute("target", "_blank");
+        itemFour.innerHTML = itemName;
+        itemFour.classList = "red-text text-spacing"
+        recList.appendChild(itemFour);
+        
+        var itemName = response.Similar.Results[4].Name;
+        var itemFive = document.createElement("a");
+        itemFive.setAttribute("href", yUrlFive);
+        itemFive.setAttribute("target", "_blank");
+        itemFive.innerHTML = itemName;
+        itemFive.classList = "red-text text-spacing"
+        recList.appendChild(itemFive);
+        
+        // LocalStorage
+        var key = userInput.value;
+        var value = artistContainerEl;
+        var dataObj = {key};
+        
+        localStorage.setItem('dataObj', JSON.stringify(dataObj));
+  
+        var retrieveObj = localStorage.getItem('dataObj');
+        console.log(JSON.parse(retrieveObj));
 
-      // LocalStorage
-      var key = "name";
-      var value = userInput.value;
-      
-      if (key && value) {
-        localStorage.setItem(key, value);
-      }
-      
-      for (i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        // var value = localStorage.getItem(key);
-        var listItem = document.createElement("li");
-        listItem.innerHTML += localStorage.getItem(key); 
-        lsOutput.appendChild(listItem);
-
-        // push value to empty myArr
-        myArr.push(value);
-        console.log(localStorage);
-        console.log(myArr);
-      }
-
-      // variable that pulls in user searched artist description 
-      var artistInfoTeaser = response.Similar.Info[0].wTeaser;
-      
-      // variable that pulls in youtube link for user searched artist
-      var yUrl = response.Similar.Info[0].yUrl;
-
-      // variables that pull in youtube links for recommendation list
-      var yUrlOne = response.Similar.Results[0].yUrl;
-      var yUrlTwo = response.Similar.Results[1].yUrl;
-      var yUrlThree = response.Similar.Results[2].yUrl;
-      var yUrlFour = response.Similar.Results[3].yUrl;
-      var yUrlFive = response.Similar.Results[4].yUrl;
-
-      // dynamically created artist container 
-      var artistCard = document.createElement("div");
-      artistCard.classList = "card grey lighten-1";
-      artistContainerEl.appendChild(artistCard);
-
-      var cardContent = document.createElement("div");
-      cardContent.classList = "card-content white-text";
-      artistCard.appendChild(cardContent);
-
-      var artistTag = document.createElement("a");
-      artistTag.classList = "card-title red-text"
-      artistTag.setAttribute("href", yUrl);
-      artistTag.setAttribute("target", "_blank");
-      artistTag.innerHTML = artist;
-      cardContent.appendChild(artistTag);
-      
-      var artistDescription = document.createElement("p");
-      artistDescription.innerHTML = artistInfoTeaser;
-      artistDescription.classList = "black-text";
-      cardContent.appendChild(artistDescription);
-      
-      // dynamically created artist recommendation container
-      var recContainer = document.createElement("div");
-      recContainer.classList = "card-action rec-container";
-      artistCard.appendChild(recContainer);
-
-      var recTitle = document.createElement("span");
-      recTitle.classList = "card-title white-text text-spacing"
-      recTitle.innerHTML = "Our Recommendations:";
-      recContainer.appendChild(recTitle);
-
-      var recList = document.createElement("ul");
-      recContainer.appendChild(recList);
-
-      var itemName = response.Similar.Results[0].Name;
-      var itemOne = document.createElement("a");
-      itemOne.setAttribute("href", yUrlOne);
-      itemOne.setAttribute("target", "_blank");
-      itemOne.innerHTML = itemName;
-      itemOne.classList = "red-text text-spacing"
-      recList.appendChild(itemOne);
-
-      var itemName = response.Similar.Results[1].Name;
-      var itemTwo = document.createElement("a");
-      itemTwo.setAttribute("href", yUrlTwo);
-      itemTwo.setAttribute("target","_blank");
-      itemTwo.innerHTML = itemName;
-      itemTwo.classList = "red-text text-spacing"
-      recList.appendChild(itemTwo); 
-
-      var itemName = response.Similar.Results[2].Name;
-      var itemThree = document.createElement("a");
-      itemThree.setAttribute("href", yUrlThree);
-      itemThree.setAttribute("target", "_blank");
-      itemThree.innerHTML = itemName;
-      itemThree.classList = "red-text text-spacing"
-      recList.appendChild(itemThree);
-
-      var itemName = response.Similar.Results[3].Name;
-      var itemFour = document.createElement("a");
-      itemFour.setAttribute("href", yUrlFour);
-      itemFour.setAttribute("target", "_blank");
-      itemFour.innerHTML = itemName;
-      itemFour.classList = "red-text text-spacing"
-      recList.appendChild(itemFour);
-
-      var itemName = response.Similar.Results[4].Name;
-      var itemFive = document.createElement("a");
-      itemFive.setAttribute("href", yUrlFive);
-      itemFive.setAttribute("target", "_blank");
-      itemFive.innerHTML = itemName;
-      itemFive.classList = "red-text text-spacing"
-      recList.appendChild(itemFive);
-
-      
-      
+        for (i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          // var value = localStorage.getItem(key);
+          var listItem = document.createElement("li");
+          listItem.innerHTML += localStorage.getItem(key); 
+          lsOutput.appendChild(listItem);
+        
+          // push value to empty myArr
+          myArr.push(value);
+          console.log(localStorage);
+          console.log(myArr);
+        }
     });
   };
   
