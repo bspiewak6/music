@@ -1,4 +1,4 @@
-# TuneOut Music App
+# TuneOut Entertainment App
 
 ## Table of Contents
 * [User Story](#user-story)
