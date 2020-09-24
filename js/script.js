@@ -3,6 +3,7 @@ var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
 var lsOutput = document.querySelector("#lsOutput");
+var pastBtn = document.querySelector("#searchBtn");
 
 // variables for news section
 var newsContainer = document.querySelector("#news-container");
@@ -12,26 +13,30 @@ var articleInput = document.querySelector("#article-input");
 // get searched items 
 var searchedArtists = JSON.parse(localStorage.getItem('artists')) || [];
 
+function pastSearch() {
+  var pastInput = userInput.value.trim();
+  
+  // push searched items to empty array
+  searchedArtists.push(pastInput);
+  localStorage.setItem('artists', JSON.stringify(searchedArtists));
+  
+  lsOutput.textContent = '';
+  for (var i = 0; i < searchedArtists.length; i++) {
+    var storage = searchedArtists[i];
+  
+    var searchedEl = document.createElement("button");
+    searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
+    searchedEl.textContent = storage;
+    searchedEl.setAttribute("type", "submit");
+    searchedEl.setAttribute("id", "searchBtn");
+    lsOutput.appendChild(searchedEl);
+  }
+};
+
 // function to get artist from user search
 function getArtist() {
   var artist = userInput.value.trim();
   
-  // push searched items to empty array
-  searchedArtists.push(artist);
-  localStorage.setItem('artists', JSON.stringify(searchedArtists));
-  
-  for (var i = 0; i < searchedArtists.length; i++) {
-    var storage = searchedArtists[i];
-
-    var searchedEl = document.createElement("button");
-    searchedEl.classList = "btn grey black-text lighten-2";
-    searchedEl.textContent = storage;
-    searchedEl.setAttribute("type", "submit");
-    lsOutput.appendChild(searchedEl);
-  }
-
-  
-
   var apiKey = "385243-TuneOut-LTR11AIV";
   // fetch call using tastedive API
 fetch(
@@ -136,6 +141,7 @@ fetch(
   function formSubmitHandler(event) {
     event.preventDefault();
     getArtist();
+    pastSearch();
   };
 
   // function that gets News Articles from the NYT api
@@ -195,6 +201,7 @@ fetch(
     newsLink.classList = "red-text text-spacing"
     newsContent.appendChild(newsLink);
     
+
     })
   };
   
@@ -212,6 +219,7 @@ fetch(
   artistSearch.addEventListener("submit", formSubmitHandler);
   // event listener added for user search button in the article section
   articleSearch.addEventListener("submit", articleSubmitHandler);
+
 
   // modal event listener and function to open on page load and close when user clicks
   document.querySelector('.instructions').style.display = 'flex';

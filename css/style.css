@@ -3,6 +3,11 @@ body {
     margin: 0;
 }
 
+.searchBtn {
+    display: block;
+    margin-top: 10px;
+}
+
 .text-spacing {
     /* padding-left: 20px; */
     justify-content: space-evenly;
