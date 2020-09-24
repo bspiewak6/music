@@ -3,17 +3,35 @@ var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
 var lsOutput = document.querySelector("#lsOutput");
-var myArr = [];
 
 // variables for news section
 var newsContainer = document.querySelector("#news-container");
 var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
+// get searched items 
+var searchedArtists = JSON.parse(localStorage.getItem('artists')) || [];
+
 // function to get artist from user search
 function getArtist() {
   var artist = userInput.value.trim();
   
+  // push searched items to empty array
+  searchedArtists.push(artist);
+  localStorage.setItem('artists', JSON.stringify(searchedArtists));
+  
+  for (var i = 0; i < searchedArtists.length; i++) {
+    var storage = searchedArtists[i];
+
+    var searchedEl = document.createElement("button");
+    searchedEl.classList = "btn grey black-text lighten-2";
+    searchedEl.textContent = storage;
+    searchedEl.setAttribute("type", "submit");
+    lsOutput.appendChild(searchedEl);
+  }
+
+  
+
   var apiKey = "385243-TuneOut-LTR11AIV";
   // fetch call using tastedive API
 fetch(
@@ -111,18 +129,6 @@ fetch(
         itemFive.innerHTML = itemName;
         itemFive.classList = "red-text text-spacing"
         recList.appendChild(itemFive);
-        
-        // LocalStorage
-        var key = userInput.value;
-        var value = artistContainerEl;
-        // var innerText = artistContainerEl.InnerText;
-        var dataObj = (key, value);
-        console.log(dataObj);
-
-        localStorage.setItem('dataObj', JSON.stringify(dataObj));
-        var retrieveObj = localStorage.getItem('dataObj');
-        var obj = JSON.parse(retrieveObj);
-        console.log(obj);
     });
   };
   
