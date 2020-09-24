@@ -37,7 +37,8 @@ THEN articles are displayed on the page
 ![Mockup](./images/TuneOut-Mockup.png)
 
 ## Screenshot
-![Screenshot](./)
+![Screenshot](./images/ScreenShot-Modal.png)
+![Screenshot](./images/ScreenShot-FirstLook.png)
 
 ## Links
 * [TuneOut Deployed Site Link](https://bspiewak6.github.io/music) 
