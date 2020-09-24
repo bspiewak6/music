@@ -39,7 +39,7 @@ THEN articles are displayed on the page
 ## Screenshot
 ![Screenshot](./images/ScreenShot-Modal.png)
 ![Screenshot](./images/ScreenShot-FirstLook.png)
-![Screenshot](./images/ScreenShot-SearchContainers.png)
+![Screenshot](./images/Screenshot-SearchContainers.png)
 
 ## Links
 * [TuneOut Deployed Site Link](https://bspiewak6.github.io/music) 
