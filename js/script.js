@@ -13,29 +13,66 @@ var articleInput = document.querySelector("#article-input");
 // get searched items
 var searchedArtists = JSON.parse(localStorage.getItem('artists')) || [];
 
-function pastSearch() {
+function pastArtistSearch() {
   var pastInput = userInput.value.trim();
-
+  
   // push searched items to empty array
   searchedArtists.push(pastInput);
+
   localStorage.setItem('artists', JSON.stringify(searchedArtists));
-  lsOutput.textContent = '';
-  for (var i = 0; i < searchedArtists.length; i++) {
-    var storage = searchedArtists[i];
-    var searchedEl = document.createElement("button");
-    searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
-    searchedEl.textContent = storage;
-    searchedEl.setAttribute("type", "submit");
-    searchedEl.setAttribute("id", "searchBtn");
-    lsOutput.appendChild(searchedEl);
+  // lsOutput.textContent = '';
+  // for (var i = 0; i < searchedArtists.length; i++) {
+    //   var storage = searchedArtists[i];
+    //   var searchedEl = document.createElement("button");
+    //   searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
+    //   searchedEl.textContent = storage;
+    //   searchedEl.setAttribute("type", "submit");
+    //   searchedEl.setAttribute("id", "searchBtn");
+    //   lsOutput.appendChild(searchedEl);
+    // }
+  };
+
+  if (searchedArtists.length > 0) {
+    for (var i = 0; i < searchedArtists.length; i++) {
+      // var storage = searchedArtists[i];
+      // var searchedEl = document.createElement("button");
+      // searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
+      // searchedEl.textContent = storage;
+      // searchedEl.setAttribute("type", "submit");
+      // searchedEl.setAttribute("id", "searchBtn");
+      // lsOutput.appendChild(searchedEl);
+      var artists = searchedArtists[searchedArtists.length -1]
+      getArtist(artists)
+    }
   }
-};
+  
+
+  // get searched articles
+  var searchedArticles = JSON.parse(localStorage.getItem('articles')) || [];
+
+  function pastArticleSearch () {
+    var pastArticleInput = articleInput.value.trim(); 
+    
+    searchedArticles.push(pastArticleInput);
+
+    localStorage.setItem('articles', JSON.stringify(searchedArticles));
+  };
+
+  if(searchedArticles.length > 0) {
+
+    for (var i = 0; i < searchedArticles.length; i++) {
+
+      var articles = searchedArticles[searchedArticles.length -1]
+      getNews(articles);
+
+    }
+  }
 
 // function to get artist from user search
 function getArtist(artist) {
   var apiKey = "385243-TuneOut-LTR11AIV";
-  // fetch call using tastedive API
 
+  // fetch call using tastedive API
   fetch(
     'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
   )
@@ -62,15 +99,18 @@ function getArtist(artist) {
       var artistCard = document.createElement("div");
       artistCard.classList = "card grey lighten-1";
       artistContainerEl.appendChild(artistCard);
+
       var cardContent = document.createElement("div");
       cardContent.classList = "card-content white-text";
       artistCard.appendChild(cardContent);
+
       var artistTag = document.createElement("a");
       artistTag.classList = "card-title red-text"
       artistTag.setAttribute("href", yUrl);
       artistTag.setAttribute("target", "_blank");
       artistTag.innerHTML = artist;
       cardContent.appendChild(artistTag);
+
       var artistDescription = document.createElement("p");
       artistDescription.innerHTML = artistInfoTeaser;
       artistDescription.classList = "black-text";
@@ -80,12 +120,15 @@ function getArtist(artist) {
       var recContainer = document.createElement("div");
       recContainer.classList = "card-action rec-container";
       artistCard.appendChild(recContainer);
+
       var recTitle = document.createElement("span");
       recTitle.classList = "card-title white-text text-spacing"
       recTitle.innerHTML = "Our Recommendations:";
       recContainer.appendChild(recTitle);
+
       var recList = document.createElement("ul");
       recContainer.appendChild(recList);
+
       var itemName = response.Similar.Results[0].Name;
       var itemOne = document.createElement("a");
       itemOne.setAttribute("href", yUrlOne);
@@ -93,6 +136,7 @@ function getArtist(artist) {
       itemOne.innerHTML = itemName;
       itemOne.classList = "red-text text-spacing"
       recList.appendChild(itemOne);
+
       var itemName = response.Similar.Results[1].Name;
       var itemTwo = document.createElement("a");
       itemTwo.setAttribute("href", yUrlTwo);
@@ -100,6 +144,7 @@ function getArtist(artist) {
       itemTwo.innerHTML = itemName;
       itemTwo.classList = "red-text text-spacing"
       recList.appendChild(itemTwo);
+
       var itemName = response.Similar.Results[2].Name;
       var itemThree = document.createElement("a");
       itemThree.setAttribute("href", yUrlThree);
@@ -107,6 +152,7 @@ function getArtist(artist) {
       itemThree.innerHTML = itemName;
       itemThree.classList = "red-text text-spacing"
       recList.appendChild(itemThree);
+
       var itemName = response.Similar.Results[3].Name;
       var itemFour = document.createElement("a");
       itemFour.setAttribute("href", yUrlFour);
@@ -114,6 +160,7 @@ function getArtist(artist) {
       itemFour.innerHTML = itemName;
       itemFour.classList = "red-text text-spacing"
       recList.appendChild(itemFour);
+
       var itemName = response.Similar.Results[4].Name;
       var itemFive = document.createElement("a");
       itemFive.setAttribute("href", yUrlFive);
@@ -124,40 +171,32 @@ function getArtist(artist) {
     });
 };
 
-if (searchedArtists.length > 0) {
-  for (var i = 0; i < searchedArtists.length; i++) {
-    var storage = searchedArtists[i];
-    var searchedEl = document.createElement("button");
-    searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
-    searchedEl.textContent = storage;
-    searchedEl.setAttribute("type", "submit");
-    searchedEl.setAttribute("id", "searchBtn");
-    lsOutput.appendChild(searchedEl);
-  }
-  var artists = searchedArtists[searchedArtists.length -1]
-  getArtist(artists)
-}
 
 // function to get artist from user search persist on page
 function formSubmitHandler(event) {
   event.preventDefault();
   var artist = userInput.value.trim();
-  getArtist(artist);
-  pastSearch();
+  getArtist(artist)
+  pastArtistSearch();
 };
 
 // function that gets News Articles from the NYT api
 function getNews() {
   // variables to hold the New York Times apiKey and url
   var newsApiKey = "y9hgElnn7nwF3TNGuAv89poiSSqIlw4X";
+
   var articleType = articleInput.value.trim();
+
   fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + articleType + "&api-key=" + newsApiKey)
     .then(function (response) {
       return response.json()
     })
     .then(function (response) {
+
+      newsContainer.innerHTML = "";
       // variable that pulls in user searched article headline
       var articleHeadline = response.response.docs[0].headline.main;
+      console.log(articleHeadline);
 
       // variable that pulls in user searched article NYT url
       var articleUrl = response.response.docs[0].web_url;
@@ -173,21 +212,26 @@ function getNews() {
       var newsCard = document.createElement("div");
       newsCard.classList = "card grey lighten-1";
       newsContainer.appendChild(newsCard);
+
       var newsContent = document.createElement("div");
       newsContent.classList = "card-content white-text";
       newsCard.appendChild(newsContent);
+
       var newsTag = document.createElement("a");
       newsTag.classList = "card-title red-text"
       newsTag.innerHTML = articleHeadline;
       newsContent.appendChild(newsTag);
+
       var newsDate = document.createElement("p");
       newsDate.classList = "black-text";
       newsDate.innerHTML = formatDate;
       newsContent.appendChild(newsDate);
+
       var newsSnippet = document.createElement("p");
       newsSnippet.classList = "black-text";
       newsSnippet.innerHTML = articleSnippet;
       newsContent.appendChild(newsSnippet);
+
       var newsLink = document.createElement("a");
       newsLink.setAttribute("href", articleUrl);
       newsLink.setAttribute("target", "_blank");
@@ -199,7 +243,9 @@ function getNews() {
 
 function articleSubmitHandler(event) {
   event.preventDefault();
-  getNews();
+  var articles = articleInput.value.trim();
+  getNews(articles);
+  pastArticleSearch();
 };
 
 // initialize the about us button
