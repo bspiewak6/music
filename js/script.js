@@ -20,27 +20,27 @@ function pastArtistSearch() {
   searchedArtists.push(pastInput);
 
   localStorage.setItem('artists', JSON.stringify(searchedArtists));
-  // lsOutput.textContent = '';
-  // for (var i = 0; i < searchedArtists.length; i++) {
-    //   var storage = searchedArtists[i];
-    //   var searchedEl = document.createElement("button");
-    //   searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
-    //   searchedEl.textContent = storage;
-    //   searchedEl.setAttribute("type", "submit");
-    //   searchedEl.setAttribute("id", "searchBtn");
-    //   lsOutput.appendChild(searchedEl);
-    // }
+  lsOutput.textContent = '';
+  for (var i = 0; i < searchedArtists.length; i++) {
+      var storage = searchedArtists[i];
+      var searchedEl = document.createElement("button");
+      searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
+      searchedEl.textContent = storage;
+      searchedEl.setAttribute("type", "submit");
+      searchedEl.setAttribute("id", "searchBtn");
+      lsOutput.appendChild(searchedEl);
+    }
   };
 
   if (searchedArtists.length > 0) {
     for (var i = 0; i < searchedArtists.length; i++) {
-      // var storage = searchedArtists[i];
-      // var searchedEl = document.createElement("button");
-      // searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
-      // searchedEl.textContent = storage;
-      // searchedEl.setAttribute("type", "submit");
-      // searchedEl.setAttribute("id", "searchBtn");
-      // lsOutput.appendChild(searchedEl);
+      var storage = searchedArtists[i];
+      var searchedEl = document.createElement("button");
+      searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
+      searchedEl.textContent = storage;
+      searchedEl.setAttribute("type", "submit");
+      searchedEl.setAttribute("id", "searchBtn");
+      lsOutput.appendChild(searchedEl);
       var artists = searchedArtists[searchedArtists.length -1]
       getArtist(artists)
     }
