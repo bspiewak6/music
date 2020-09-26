@@ -136,6 +136,7 @@ function formSubmitHandler(event) {
   }
   getArtist(artist)
   pastArtistSearch();
+  pastBtnSearch();
 };
 
 // function that gets News Articles from the NYT api
@@ -207,6 +208,7 @@ function articleSubmitHandler(event) {
   }
   getNews(articles);
   pastArticleSearch();
+  pastArticleBtn();
 };
 
 // get searched artist
@@ -218,19 +220,22 @@ function pastArtistSearch() {
   searchedArtists.push(pastInput);
   localStorage.setItem('artists', JSON.stringify(searchedArtists));
   lsOutput.textContent = '';
-  for (var i = 0; i < searchedArtists.length; i++) {
-      var storage = searchedArtists[i];
-      var searchedEl = document.createElement("button");
-      searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
-      searchedEl.textContent = storage;
-      lsOutput.appendChild(searchedEl);
-    }
-  };
+};
 
+function pastBtnSearch() {
+  for (var i = 0; i < searchedArtists.length; i++) {
+    var storage = searchedArtists[i];
+        var searchedEl = document.createElement("button");
+        searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
+        searchedEl.textContent = storage;
+        lsOutput.appendChild(searchedEl);
+    }
+};
     if (searchedArtists.length > 0) {
         var artists = searchedArtists[searchedArtists.length -1]
         getArtist(artists)
-  };
+        pastBtnSearch();
+};
 
 // get searched articles
 var searchedArticles = JSON.parse(localStorage.getItem('articles')) || [];
@@ -241,7 +246,9 @@ function pastArticleSearch () {
   searchedArticles.push(pastArticleInput);
   localStorage.setItem('articles', JSON.stringify(searchedArticles));
   articleOutput.textContent = '';
-    
+};
+
+function pastArticleBtn () {
   for (var i = 0; i < searchedArticles.length; i++) {
     var articleStorage = searchedArticles[i];
     var articleSearchEl = document.createElement("button");
@@ -249,11 +256,11 @@ function pastArticleSearch () {
     articleSearchEl.textContent = articleStorage;
     articleOutput.appendChild(articleSearchEl);
     }
-  };
-
-    if(searchedArticles.length > 0) {
-        var articles = searchedArticles[searchedArticles.length -1]
-        getNews(articles);
+};
+  if(searchedArticles.length > 0) {
+    var articles = searchedArticles[searchedArticles.length -1]
+      getNews(articles);
+      pastArticleBtn();
   };
 
 // initialize the about us button
