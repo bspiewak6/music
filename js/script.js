@@ -24,15 +24,8 @@ window.onclick = function(event) {
 
 // function to get artist from user search
 function getArtist(artist) {
-  var artist = userInput.value.trim();
-  
-  //if statement for error 
-  if(artist == null || artist == ''){
-  M.toast({html: 'Invalid Input!'});
-  return false; 
-}
-  
   var apiKey = "385243-TuneOut-LTR11AIV";
+
   // fetch call using tastedive API
   fetch(
     'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
@@ -136,17 +129,22 @@ function getArtist(artist) {
 function formSubmitHandler(event) {
   event.preventDefault();
   var artist = userInput.value.trim();
+  //if statement for error
+  if(artist === ""){
+    M.toast({html: "Invalid Input!"});
+    return false;
+  }
   getArtist(artist)
   pastArtistSearch();
+  pastBtnSearch();
 };
 
 // function that gets News Articles from the NYT api
-function getNews() {
+function getNews(article) {
   // variable to hold the New York Times apiKey
   var newsApiKey = "y9hgElnn7nwF3TNGuAv89poiSSqIlw4X";
-  var articleType = articleInput.value.trim();
 
-  fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + articleType + "&api-key=" + newsApiKey)
+  fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + article + "&api-key=" + newsApiKey)
     .then(function (response) {
       return response.json()
     })
@@ -203,8 +201,14 @@ function getNews() {
 function articleSubmitHandler(event) {
   event.preventDefault();
   var articles = articleInput.value.trim();
+  //if statement for error
+  if(articles === ""){
+    M.toast({html: "Invalid Input!"});
+    return false;
+  }
   getNews(articles);
   pastArticleSearch();
+  pastArticleBtn();
 };
 
 // get searched artist
@@ -216,21 +220,22 @@ function pastArtistSearch() {
   searchedArtists.push(pastInput);
   localStorage.setItem('artists', JSON.stringify(searchedArtists));
   lsOutput.textContent = '';
-  for (var i = 0; i < searchedArtists.length; i++) {
-      var storage = searchedArtists[i];
-      var searchedEl = document.createElement("button");
-      searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
-      searchedEl.textContent = storage;
-      lsOutput.appendChild(searchedEl);
-    }
-  };
+};
 
+function pastBtnSearch() {
+  for (var i = 0; i < searchedArtists.length; i++) {
+    var storage = searchedArtists[i];
+        var searchedEl = document.createElement("button");
+        searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
+        searchedEl.textContent = storage;
+        lsOutput.appendChild(searchedEl);
+    }
+};
     if (searchedArtists.length > 0) {
-      for (var i = 0; i < searchedArtists.length; i++) {
         var artists = searchedArtists[searchedArtists.length -1]
         getArtist(artists)
-    }
-  };
+        pastBtnSearch();
+};
 
 // get searched articles
 var searchedArticles = JSON.parse(localStorage.getItem('articles')) || [];
@@ -241,7 +246,9 @@ function pastArticleSearch () {
   searchedArticles.push(pastArticleInput);
   localStorage.setItem('articles', JSON.stringify(searchedArticles));
   articleOutput.textContent = '';
-    
+};
+
+function pastArticleBtn () {
   for (var i = 0; i < searchedArticles.length; i++) {
     var articleStorage = searchedArticles[i];
     var articleSearchEl = document.createElement("button");
@@ -249,13 +256,11 @@ function pastArticleSearch () {
     articleSearchEl.textContent = articleStorage;
     articleOutput.appendChild(articleSearchEl);
     }
-  };
-
-    if(searchedArticles.length > 0) {
-      for (var i = 0; i < searchedArticles.length; i++) {
-        var articles = searchedArticles[searchedArticles.length -1]
-        getNews(articles);
-    }
+};
+  if(searchedArticles.length > 0) {
+    var articles = searchedArticles[searchedArticles.length -1]
+      getNews(articles);
+      pastArticleBtn();
   };
 
 // initialize the about us button
