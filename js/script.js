@@ -129,6 +129,11 @@ function getArtist(artist) {
 function formSubmitHandler(event) {
   event.preventDefault();
   var artist = userInput.value.trim();
+  //if statement for error
+  if(artist === ""){
+    M.toast({html: "Invalid Input!"});
+    return false;
+  }
   getArtist(artist)
   pastArtistSearch();
 };
@@ -195,6 +200,11 @@ function getNews(article) {
 function articleSubmitHandler(event) {
   event.preventDefault();
   var articles = articleInput.value.trim();
+  //if statement for error
+  if(articles === ""){
+    M.toast({html: "Invalid Input!"});
+    return false;
+  }
   getNews(articles);
   pastArticleSearch();
 };
