@@ -3,75 +3,36 @@ var artistContainerEl = document.querySelector("#artist-container");
 var artistSearch = document.querySelector("#artist-search");
 var userInput = document.querySelector("#icon_suffix");
 var lsOutput = document.querySelector("#lsOutput");
+var articleOutput = document.querySelector("#articleOutput");
 var pastBtn = document.querySelector("#searchBtn");
+var modal = document.querySelector("#modal1");
 
 // variables for news section
 var newsContainer = document.querySelector("#news-container");
 var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
-// get searched items
-var searchedArtists = JSON.parse(localStorage.getItem('artists')) || [];
-
-function pastArtistSearch() {
-  var pastInput = userInput.value.trim();
-  
-  // push searched items to empty array
-  searchedArtists.push(pastInput);
-
-  localStorage.setItem('artists', JSON.stringify(searchedArtists));
-  lsOutput.textContent = '';
-  for (var i = 0; i < searchedArtists.length; i++) {
-      var storage = searchedArtists[i];
-      var searchedEl = document.createElement("button");
-      searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
-      searchedEl.textContent = storage;
-      searchedEl.setAttribute("type", "submit");
-      searchedEl.setAttribute("id", "searchBtn");
-      lsOutput.appendChild(searchedEl);
-    }
-  };
-
-  if (searchedArtists.length > 0) {
-    for (var i = 0; i < searchedArtists.length; i++) {
-      var storage = searchedArtists[i];
-      var searchedEl = document.createElement("button");
-      searchedEl.classList = "btn grey black-text lighten-2 searchBtn";
-      searchedEl.textContent = storage;
-      searchedEl.setAttribute("type", "submit");
-      searchedEl.setAttribute("id", "searchBtn");
-      lsOutput.appendChild(searchedEl);
-      var artists = searchedArtists[searchedArtists.length -1]
-      getArtist(artists)
-    }
+// when user clicks outside of the modal it will close
+window.onclick = function(event) {
+  if (event.target.closest(".modal-content")) {
+    return;
   }
-  
-
-  // get searched articles
-  var searchedArticles = JSON.parse(localStorage.getItem('articles')) || [];
-
-  function pastArticleSearch () {
-    var pastArticleInput = articleInput.value.trim(); 
-    
-    searchedArticles.push(pastArticleInput);
-
-    localStorage.setItem('articles', JSON.stringify(searchedArticles));
-  };
-
-  if(searchedArticles.length > 0) {
-
-    for (var i = 0; i < searchedArticles.length; i++) {
-
-      var articles = searchedArticles[searchedArticles.length -1]
-      getNews(articles);
-
-    }
+  else {
+    modal.style.display = 'none';
   }
+};
 
 // function to get artist from user search
 function getArtist(artist) {
+  var artist = userInput.value.trim();
+  
+  //if statement for error 
+  if(artist == null || artist == ''){
+  M.toast({html: 'Invalid Input!'});
+  return false; 
+}
+  
   var apiKey = "385243-TuneOut-LTR11AIV";
-
   // fetch call using tastedive API
   fetch(
     'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
@@ -89,7 +50,7 @@ function getArtist(artist) {
     var yUrl = response.Similar.Info[0].yUrl;
 
     // variables that pull in youtube links for recommendation list
-    var yUrlOne = response.Similar.Results[0].yUrl;
+      var yUrlOne = response.Similar.Results[0].yUrl;
       var yUrlTwo = response.Similar.Results[1].yUrl;
       var yUrlThree = response.Similar.Results[2].yUrl;
       var yUrlFour = response.Similar.Results[3].yUrl;
@@ -171,7 +132,6 @@ function getArtist(artist) {
     });
 };
 
-
 // function to get artist from user search persist on page
 function formSubmitHandler(event) {
   event.preventDefault();
@@ -182,9 +142,8 @@ function formSubmitHandler(event) {
 
 // function that gets News Articles from the NYT api
 function getNews() {
-  // variables to hold the New York Times apiKey and url
+  // variable to hold the New York Times apiKey
   var newsApiKey = "y9hgElnn7nwF3TNGuAv89poiSSqIlw4X";
-
   var articleType = articleInput.value.trim();
 
   fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + articleType + "&api-key=" + newsApiKey)
@@ -196,7 +155,6 @@ function getNews() {
       newsContainer.innerHTML = "";
       // variable that pulls in user searched article headline
       var articleHeadline = response.response.docs[0].headline.main;
-      console.log(articleHeadline);
 
       // variable that pulls in user searched article NYT url
       var articleUrl = response.response.docs[0].web_url;
@@ -241,6 +199,7 @@ function getNews() {
     })
 };
 
+// function for article search
 function articleSubmitHandler(event) {
   event.preventDefault();
   var articles = articleInput.value.trim();
@@ -248,31 +207,67 @@ function articleSubmitHandler(event) {
   pastArticleSearch();
 };
 
+// get searched artist
+var searchedArtists = JSON.parse(localStorage.getItem('artists')) || [];
+
+// function to push search artist and append to page below search bar
+function pastArtistSearch() {
+  var pastInput = userInput.value.trim();
+  searchedArtists.push(pastInput);
+  localStorage.setItem('artists', JSON.stringify(searchedArtists));
+  lsOutput.textContent = '';
+  for (var i = 0; i < searchedArtists.length; i++) {
+      var storage = searchedArtists[i];
+      var searchedEl = document.createElement("button");
+      searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
+      searchedEl.textContent = storage;
+      lsOutput.appendChild(searchedEl);
+    }
+  };
+
+    if (searchedArtists.length > 0) {
+      for (var i = 0; i < searchedArtists.length; i++) {
+        var artists = searchedArtists[searchedArtists.length -1]
+        getArtist(artists)
+    }
+  };
+
+// get searched articles
+var searchedArticles = JSON.parse(localStorage.getItem('articles')) || [];
+  
+// function to push search article and append to page below search bar
+function pastArticleSearch () {
+  var pastArticleInput = articleInput.value.trim(); 
+  searchedArticles.push(pastArticleInput);
+  localStorage.setItem('articles', JSON.stringify(searchedArticles));
+  articleOutput.textContent = '';
+    
+  for (var i = 0; i < searchedArticles.length; i++) {
+    var articleStorage = searchedArticles[i];
+    var articleSearchEl = document.createElement("button");
+    articleSearchEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
+    articleSearchEl.textContent = articleStorage;
+    articleOutput.appendChild(articleSearchEl);
+    }
+  };
+
+    if(searchedArticles.length > 0) {
+      for (var i = 0; i < searchedArticles.length; i++) {
+        var articles = searchedArticles[searchedArticles.length -1]
+        getNews(articles);
+    }
+  };
+
 // initialize the about us button
 $(document).ready(function () {
   $('.tooltipped').tooltip();
 });
-
-// variable to select div container holding the modal
-var modal = document.querySelector("#modal1");
-
-// when user clicks outside of the modal it will close
-window.onclick = function(event) {
-  if (event.target.closest(".modal-content")) {
-    return;
-  }
-  else {
-    modal.style.display = 'none';
-  }
-}
 
 // event listener added for user search button
 artistSearch.addEventListener("submit", formSubmitHandler);
 
 // event listener added for user search button in the article section
 articleSearch.addEventListener("submit", articleSubmitHandler);
-
-// pastBtn.addEventListener("click", getArtist);
 
 // modal event listener and function to open on page load and close when user clicks
 document.querySelector('.instructions').style.display = 'flex';
