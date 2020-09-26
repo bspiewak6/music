@@ -5,7 +5,7 @@
 * [Criteria](#criteria)
 * [Technologies](#technologies)
 * [Mockup](#mockup)
-* [App Demo](#app-demo)
+* [Screenshots](#screenshots)
 * [Links](#links)
 
 ## User Story
@@ -36,10 +36,11 @@ THEN articles are displayed on the page
 ## Mockup
 ![Mockup](./images/TuneOut-Mockup.png)
 
-## App Demo
-![App Demo](./images/TuneOut.mp4)
-
+## Screenshots
+![Screenshot](./images/ScreenShot-Modal.png)
+![Screenshot](./images/ScreenShot-FirstLook.png)
+![Screenshot](./images/Screenshot-SearchContainers.png)
 
 ## Links
 * [TuneOut Deployed Site Link](https://bspiewak6.github.io/music) 
-* [TuneOut Github Repository](https://github.com/bspiewak6/music)
+* [TuneOut GitHub Repository](https://github.com/bspiewak6/music)
