@@ -13,7 +13,7 @@ var articleSearch = document.querySelector("#article-search");
 var articleInput = document.querySelector("#article-input");
 
 // when user clicks outside of the modal it will close
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target.closest(".modal-content")) {
     return;
   }
@@ -28,21 +28,21 @@ function getArtist(artist) {
 
   // fetch call using tastedive API
   fetch(
-    'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
+    'https://shielded-sea-51175.herokuapp.com/https://tastedive.com/api/similar?info=1&q=' + artist + '&k=' + apiKey + '&limit=5'
   )
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (response) {
-    artistContainerEl.innerHTML = "";
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      artistContainerEl.innerHTML = "";
 
-    // variable that pulls in user searched artist description
-    var artistInfoTeaser = response.Similar.Info[0].wTeaser;
+      // variable that pulls in user searched artist description
+      var artistInfoTeaser = response.Similar.Info[0].wTeaser;
 
-    // variable that pulls in youtube link for user searched artist
-    var yUrl = response.Similar.Info[0].yUrl;
+      // variable that pulls in youtube link for user searched artist
+      var yUrl = response.Similar.Info[0].yUrl;
 
-    // variables that pull in youtube links for recommendation list
+      // variables that pull in youtube links for recommendation list
       var yUrlOne = response.Similar.Results[0].yUrl;
       var yUrlTwo = response.Similar.Results[1].yUrl;
       var yUrlThree = response.Similar.Results[2].yUrl;
@@ -130,8 +130,8 @@ function formSubmitHandler(event) {
   event.preventDefault();
   var artist = userInput.value.trim();
   //if statement for error
-  if(artist === ""){
-    M.toast({html: "Invalid Input!"});
+  if (artist === "") {
+    M.toast({ html: "Invalid Input!" });
     return false;
   }
   getArtist(artist)
@@ -202,8 +202,8 @@ function articleSubmitHandler(event) {
   event.preventDefault();
   var articles = articleInput.value.trim();
   //if statement for error
-  if(articles === ""){
-    M.toast({html: "Invalid Input!"});
+  if (articles === "") {
+    M.toast({ html: "Invalid Input!" });
     return false;
   }
   getNews(articles);
@@ -225,43 +225,43 @@ function pastArtistSearch() {
 function pastBtnSearch() {
   for (var i = 0; i < searchedArtists.length; i++) {
     var storage = searchedArtists[i];
-        var searchedEl = document.createElement("button");
-        searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
-        searchedEl.textContent = storage;
-        lsOutput.appendChild(searchedEl);
-    }
+    var searchedEl = document.createElement("button");
+    searchedEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
+    searchedEl.textContent = storage;
+    lsOutput.appendChild(searchedEl);
+  }
 };
-    if (searchedArtists.length > 0) {
-        var artists = searchedArtists[searchedArtists.length -1]
-        getArtist(artists)
-        pastBtnSearch();
+if (searchedArtists.length > 0) {
+  var artists = searchedArtists[searchedArtists.length - 1]
+  getArtist(artists)
+  pastBtnSearch();
 };
 
 // get searched articles
 var searchedArticles = JSON.parse(localStorage.getItem('articles')) || [];
-  
+
 // function to push search article and append to page below search bar
-function pastArticleSearch () {
-  var pastArticleInput = articleInput.value.trim(); 
+function pastArticleSearch() {
+  var pastArticleInput = articleInput.value.trim();
   searchedArticles.push(pastArticleInput);
   localStorage.setItem('articles', JSON.stringify(searchedArticles));
   articleOutput.textContent = '';
 };
 
-function pastArticleBtn () {
+function pastArticleBtn() {
   for (var i = 0; i < searchedArticles.length; i++) {
     var articleStorage = searchedArticles[i];
     var articleSearchEl = document.createElement("button");
     articleSearchEl.classList = "btn disabled grey black-text lighten-2 searchBtn";
     articleSearchEl.textContent = articleStorage;
     articleOutput.appendChild(articleSearchEl);
-    }
+  }
 };
-  if(searchedArticles.length > 0) {
-    var articles = searchedArticles[searchedArticles.length -1]
-      getNews(articles);
-      pastArticleBtn();
-  };
+if (searchedArticles.length > 0) {
+  var articles = searchedArticles[searchedArticles.length - 1]
+  getNews(articles);
+  pastArticleBtn();
+};
 
 // initialize the about us button
 $(document).ready(function () {
@@ -277,5 +277,5 @@ articleSearch.addEventListener("submit", articleSubmitHandler);
 // modal event listener and function to open on page load and close when user clicks
 document.querySelector('.instructions').style.display = 'flex';
 document.querySelector('.close').addEventListener('click', function () {
-document.querySelector('.instructions').style.display = 'none';
+  document.querySelector('.instructions').style.display = 'none';
 });
